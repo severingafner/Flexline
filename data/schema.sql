@@ -1,8 +1,0 @@
-﻿DROP TABLE IF EXISTS user;
-CREATE TABLE  user (
-  id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  email     VARCHAR(128) NOT NULL,
-  password  VARCHAR(40)  NOT NULL,
-  salt      VARCHAR(40)  NOT NULL,
-  PRIMARY KEY  (id)
-);
