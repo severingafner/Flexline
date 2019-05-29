@@ -71,14 +71,11 @@ namespace Flexline.Controllers
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Movie movie = await db.Movies.FindAsync(id);
+
+            var movie = await db.Movies.FindAsync(id);
             if (movie == null)
-            {
                 return HttpNotFound();
-            }
             return View(movie);
         }
 
@@ -102,14 +99,12 @@ namespace Flexline.Controllers
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Movie movie = await db.Movies.FindAsync(id);
+
+            var movie = await db.Movies.FindAsync(id);
             if (movie == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(movie);
         }
 
@@ -118,7 +113,7 @@ namespace Flexline.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Movie movie = await db.Movies.FindAsync(id);
+            var movie = await db.Movies.FindAsync(id);
             db.Movies.Remove(movie);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -127,9 +122,8 @@ namespace Flexline.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 db.Dispose();
-            }
+
             base.Dispose(disposing);
         }
     }

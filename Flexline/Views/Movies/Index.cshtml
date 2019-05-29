@@ -9,13 +9,17 @@
     @Html.ActionLink("Neuen Film erstellen", "Create")
 </p>
 
-<div>
-    @using(Html.BeginForm("", "Movies"))
-    {
-        @Html.EditorFor(m => m.SearchString)
-        <button type="submit">Suchen</button>
-    }
-</div>
+@using (Html.BeginForm("", "Movies"))
+{
+    <div class="col-md-6" style="float: right; margin-bottom: 10px">
+        <div class="input-group">
+            @Html.EditorFor(m => m.SearchString, new { htmlAttributes = new { @class = "form-control", placeholder = "Name eingeben..." } })
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </div>
+}
 
 <table class="table">
     <thead>
