@@ -14,6 +14,7 @@ namespace Flexline.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Movies
+        [ValidateInput(false)]
         public async Task<ActionResult> Index(string searchString)
         {
             IQueryable<Movie> movies = db.Movies.OrderBy(m => m.Name);

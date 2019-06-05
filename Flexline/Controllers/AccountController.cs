@@ -14,6 +14,7 @@ namespace Flexline.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private const string _pepper = "bf944798-31a5-470a-830c-0bc3c606f323";
 
         public AccountController()
         {
@@ -68,6 +69,8 @@ namespace Flexline.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
+            model.Password = $"{_pepper}{model.Password}{_pepper}";
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -103,6 +106,7 @@ namespace Flexline.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Password = $"{_pepper}{model.Password}{_pepper}";
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
